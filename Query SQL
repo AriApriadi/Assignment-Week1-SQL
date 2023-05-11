@@ -1,0 +1,34 @@
+USE classicmodels;
+
+SHOW TABLES;
+
+SELECT * FROM customers;
+
+SELECT employeeNumber, firstName, lastName, jobTitle FROM employees ORDER BY firstName;
+
+SELECT employeeNumber, firstName, lastName FROM employees
+WHERE firstName LIKE 'Jeff%'
+ORDER BY firstName;
+
+SELECT officeCode, count(employeeNumber) headcount
+FROM employees
+GROUP BY officeCode
+HAVING headcount >= 5;
+
+SELECT  d.customerName
+FROM customers AS d;
+
+SELECT employeeNumber, firstName, lastName, jobTitle, e.officeCode, addressLine1 FROM employees e
+INNER JOIN offices d ON d.officeCode = e.officeCode
+ORDER BY firstName DESC;
+
+SELECT AVG(amount)
+FROM payments;
+
+SELECT
+customerNumber, COUNT(*)
+FROM payments
+GROUP BY customerNumber;
+
+SELECT * FROM payments
+WHERE customerNumber IN (SELECT customerNumber FROM payments WHERE amount > 4500) ;
